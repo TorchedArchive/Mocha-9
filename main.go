@@ -3,11 +3,15 @@ package main
 import (
 	"fmt"
 	"os"
+	"image/color"
 
+	"github.com/PinwheelSystem/PaletteNom"
+	"github.com/PinwheelSystem/bitmap"
 	"github.com/akamensky/argparse"
 )
 
 var font map[string]bitmap.Glyph
+var palette []color.Color
 
 func main() {
 	parser := argparse.NewParser("mocha-9", "A sweet warm fantasy brew.")
@@ -16,7 +20,7 @@ func main() {
 	if err != nil {
 		fmt.Print(parser.Usage(err))
 	}
-	
+
 	// Load bitmap font
 	// TODO: Use a different font
 	bm := bitmap.New()
@@ -25,7 +29,8 @@ func main() {
 	// Load palette for
 	// TODO: Monochrome palette, like gameboy screen (green and green-black)
 	palettelib := palettenom.New()
-	colors, err := palettelib.Load("coffeebrew.png")
+	palette, err = palettelib.Load("palettes/coffeebrew.png")
+
 	if err != nil {
 		panic(err)
 	}
