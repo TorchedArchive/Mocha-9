@@ -13,4 +13,19 @@ end)
 
 clear()
 
+setfunc("rect", function (x, y, w, h, color)
+	local dx = x
+	local dy = y
+	
+	for hi = h, 0, -1 do
+		for wi = w, 0, -1 do
+			plot(dx, dy, color)
+			dx = dx + 1
+		end
+		dy = dy + 1
+		dx = x
+	end
+end)
+
+
 dofile('program.lua')
