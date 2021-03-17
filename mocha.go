@@ -19,7 +19,7 @@ func Run() {
 	defer sdl.Quit()
 
 	// Setup our window
-	window, err := sdl.CreateWindow("Mocha-9", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, 144 * 4, 81 * 4, sdl.WINDOW_SHOWN)
+	window, err := sdl.CreateWindow("Mocha-9", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, 144 * 4, 81 * 4, sdl.WINDOW_SHOWN | sdl.WINDOW_RESIZABLE)
 	if err != nil {
 		panic(err)
 	}
