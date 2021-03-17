@@ -1,3 +1,5 @@
+github.com/PinwheelSystem/bitmap v0.0.0-20201219205654-dde25ed9f0ab h1:6qpfNI7TNwbmhqjHV0EyiFziwBaXR7u7HOgd1zLv2Tg=
+github.com/PinwheelSystem/bitmap v0.0.0-20201219205654-dde25ed9f0ab/go.mod h1:ZoIaTfMgsZcB025jsmYlm+dUAnTpFl2wV3MxfO+xb+U=
 github.com/akamensky/argparse v1.2.2 h1:P17T0ZjlUNJuWTPPJ2A5dM1wxarHgHqfYH+AZTo2xQA=
 github.com/akamensky/argparse v1.2.2/go.mod h1:S5kwC7IuDcEr5VeXtGPRVZ5o/FdhcMlQz4IZQuw64xA=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
