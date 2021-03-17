@@ -19,7 +19,7 @@ func Run() {
 	defer sdl.Quit()
 
 	// Setup our window
-	window, err := sdl.CreateWindow("Mocha-9", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, 81 * 4, 81 * 4, sdl.WINDOW_SHOWN)
+	window, err := sdl.CreateWindow("Mocha-9", sdl.WINDOWPOS_UNDEFINED, sdl.WINDOWPOS_UNDEFINED, 144 * 4, 81 * 4, sdl.WINDOW_SHOWN)
 	if err != nil {
 		panic(err)
 	}
@@ -34,7 +34,7 @@ func Run() {
 
 
 	// Setup SDL texture that will be used as our screen
-	screen, err := renderer.CreateTexture(sdl.PIXELFORMAT_ARGB8888, sdl.TEXTUREACCESS_STREAMING, 81, 81)
+	screen, err := renderer.CreateTexture(sdl.PIXELFORMAT_ARGB8888, sdl.TEXTUREACCESS_STREAMING, 144, 81)
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +58,7 @@ func Run() {
 		}
 
 		// Update screen with VRAM content
-		screen.Update(nil, vram, 81 * 4)
+		screen.Update(nil, vram, 144 * 4)
 		// Copy to renderer
 		renderer.Copy(screen, nil, nil)
 
@@ -68,7 +68,7 @@ func Run() {
 }
 
 func setpixel(x, y int, c color.Color) {
-	offset := ( 81 * 4 * y ) + x * 4;
+	offset := ( 144 * 4 * y ) + x * 4;
 	r, g, b, _ := c.RGBA()
 	vram[offset + 0] = byte(b)
 	vram[offset + 1] = byte(g)
