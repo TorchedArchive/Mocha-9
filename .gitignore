@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+mocha-9
 
 # Test binary, built with `go test -c`
 *.test
