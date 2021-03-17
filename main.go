@@ -29,7 +29,7 @@ func main() {
 	// Load palette for
 	// TODO: Monochrome palette, like gameboy screen (green and green-black)
 	palettelib := palettenom.New()
-	palette, err = palettelib.Load("palettes/coffeebrew.png")
+	palette, err = palettelib.Load("palettes/monobrew.png")
 
 	if err != nil {
 		panic(err)
