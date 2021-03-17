@@ -6,11 +6,11 @@
 setfunc("clear", function ()
 	for x = 143, 0, -1 do
 		for y = 80, 0, -1 do
-			plot(x, y, 0)
+			plot(x, y, i1)
 		end
 	end
 end)
 
 clear()
 
-dofile('hello.lua')
+dofile('program.lua')
