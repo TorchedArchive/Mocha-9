@@ -1,6 +1,5 @@
--- Mocha-9's "bios" will setup the console for higher level usage,
--- add useful functions and other stuff a BIOS usually does i guess
--- For now it just sets up basic functions and calls a lua file
+-- Mocha-9 on boot will setup the console for higher level usage;
+-- add useful functions, and do other stuff a BIOS might do
 
 -- Define clear function
 setfunc("clear", function ()
