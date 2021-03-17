@@ -10,7 +10,7 @@ var vram []byte
 
 func Run() {
 	// Initialize VRAM
-	vram = make([]byte, 81 * 81 * 4)
+	vram = make([]byte, 144 * 81 * 4)
 
 	// Initialize SDL
 	if err := sdl.Init(sdl.INIT_EVERYTHING); err != nil {
