@@ -4,7 +4,6 @@ import (
 	"image/color"
 
 	"github.com/veandco/go-sdl2/sdl"
-	"github.com/PinwheelSystem/bitmap"
 )
 
 var vram []byte
