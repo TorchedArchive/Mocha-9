@@ -1,1 +1,2 @@
-print("Hello world!", 0, 0, 1)
+print("Hello world!", 20, 70, 3)
+
