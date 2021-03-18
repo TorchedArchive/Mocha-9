@@ -4,10 +4,15 @@ import (
 	"fmt"
 
 	"github.com/yuin/gopher-lua"
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 var l *lua.LState
 var lcart *lua.LState
+var buttons = map[int]bool{
+	0: false}
+
+var started = false
 
 func InitLua() {
 	l = lua.NewState()
@@ -23,6 +28,14 @@ func InitLua() {
 	SetGlobalF("debugprint", l.NewFunction(m9debugprint))
 	SetGlobalF("print", l.NewFunction(m9print))
 	SetGlobalF("plot", l.NewFunction(m9plot))
+	SetGlobalF("button", l.NewFunction(m9button))
+
+	interrupts.On("key", func(sc sdl.Scancode) {
+		switch sc {
+		case sdl.SCANCODE_UP:
+			buttons[0] = true
+		}
+	})
 
 	if err := l.DoFile("mocha.lua"); err != nil {
 		panic(err)
@@ -49,6 +62,7 @@ func m9setfunc(L *lua.LState) int {
 
 func m9dofile(l *lua.LState) int {
 	cart := l.ToString(1)
+	started = true
 	err := lcart.DoFile(cart)
 	if err != nil {
 		panic(err)
@@ -82,7 +96,7 @@ func m9print(L *lua.LState) int {
 	for _, ch := range text {
 		char := font[string(ch)]
 		for i := 0; i < char.Height; i++ {
-		 	bin := char.Data[i]
+			bin := char.Data[i]
 
 			for _, pix := range bin {
 				if string(pix) == "1" {
@@ -91,7 +105,7 @@ func m9print(L *lua.LState) int {
 						char.Y + yy,
 						c)
 				}
-			 	xx += 1
+				xx += 1
 			}
 			yy += 1
 			xx = x
@@ -112,4 +126,18 @@ func m9plot(L *lua.LState) int {
 	setpixel(x, y, c)
 
 	return 0
+}
+
+func m9button(L *lua.LState) int {
+	key := L.ToInt(1)
+
+	btn := buttons[key]
+	if btn == true {
+		lcart.Push(lua.LBool(true))
+		buttons[key] = false
+	} else {
+		lcart.Push(lua.LBool(false))
+	}
+
+	return 1
 }

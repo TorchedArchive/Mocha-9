@@ -2,11 +2,15 @@ package main
 
 import (
 	"image/color"
+	_ "fmt"
 
 	"github.com/veandco/go-sdl2/sdl"
+	"github.com/yuin/gopher-lua"
+	"github.com/chuckpreslar/emission"
 )
 
 var vram []byte
+var interrupts = emission.NewEmitter()
 
 func Run() {
 	// Initialize VRAM
@@ -49,11 +53,29 @@ func Run() {
 	// SDl screen loop
 	for running {
 		for event := sdl.PollEvent(); event != nil; event = sdl.PollEvent() {
-			switch event.(type) {
+			switch e := event.(type) {
 			case *sdl.QuitEvent:
 				println("Quit")
 				running = false
 				break
+			case *sdl.KeyboardEvent:
+				if e.Repeat == 0 {
+					if e.Type == sdl.KEYDOWN {
+						interrupts.Emit(
+							"key",
+							e.Keysym.Scancode)
+					}
+				}
+			}
+		}
+
+		if started {
+			if err := lcart.CallByParam(lua.P{
+				Fn: lcart.GetGlobal("Brew"),
+				NRet: 0,
+				Protect: true,
+			}); err != nil {
+				panic(err)
 			}
 		}
 
