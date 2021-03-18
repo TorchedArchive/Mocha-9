@@ -3,8 +3,8 @@
 
 -- Define clear function
 setfunc("clear", function ()
-	for x = 143, 0, -1 do
-		for y = 80, 0, -1 do
+	for x = 179, 0, -1 do
+		for y = 119, 0, -1 do
 			plot(x, y, i1)
 		end
 	end

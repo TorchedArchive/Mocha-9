@@ -11,10 +11,12 @@ import (
 
 var vram []byte
 var interrupts = emission.NewEmitter()
+var length = 180
+var height = 120
 
 func Run() {
 	// Initialize VRAM
-	vram = make([]byte, 144 * 81 * 4)
+	vram = make([]byte, length * height * 4)
 
 	// Initialize SDL
 	if err := sdl.Init(sdl.INIT_EVERYTHING); err != nil {
@@ -23,7 +25,7 @@ func Run() {
 	defer sdl.Quit()
 
 	// Setup our window
-	window, err := sdl.CreateWindow("Mocha-9", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, 144 * 4, 81 * 4, sdl.WINDOW_SHOWN | sdl.WINDOW_RESIZABLE)
+	window, err := sdl.CreateWindow("Mocha-9", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, int32(length) * 4, int32(height) * 4, sdl.WINDOW_SHOWN | sdl.WINDOW_RESIZABLE)
 	if err != nil {
 		panic(err)
 	}
@@ -38,7 +40,7 @@ func Run() {
 
 
 	// Setup SDL texture that will be used as our screen
-	screen, err := renderer.CreateTexture(sdl.PIXELFORMAT_ARGB8888, sdl.TEXTUREACCESS_STREAMING, 144, 81)
+	screen, err := renderer.CreateTexture(sdl.PIXELFORMAT_ARGB8888, sdl.TEXTUREACCESS_STREAMING, int32(length), int32(height))
 	if err != nil {
 		panic(err)
 	}
@@ -80,7 +82,7 @@ func Run() {
 		}
 
 		// Update screen with VRAM content
-		screen.Update(nil, vram, 144 * 4)
+		screen.Update(nil, vram, length * 4)
 		// Copy to renderer
 		renderer.Copy(screen, nil, nil)
 
@@ -90,7 +92,7 @@ func Run() {
 }
 
 func setpixel(x, y int, c color.Color) {
-	offset := ( 144 * 4 * y ) + x * 4;
+	offset := ( length * 4 * y ) + x * 4;
 	r, g, b, _ := c.RGBA()
 	vram[offset + 0] = byte(b)
 	vram[offset + 1] = byte(g)
