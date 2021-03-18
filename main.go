@@ -15,7 +15,11 @@ var palette []color.Color
 
 func main() {
 	parser := argparse.NewParser("mocha-9", "A sweet warm fantasy brew.")
-
+	palettename := parser.String("p", "palette", &argparse.Options{
+		Required: false,
+		Help: "color palette to use",
+		Default: "coffeebrew",
+	})
 	err := parser.Parse(os.Args)
 	if err != nil {
 		fmt.Print(parser.Usage(err))
@@ -29,7 +33,7 @@ func main() {
 	// Load palette for
 	// TODO: Monochrome palette, like gameboy screen (green and green-black)
 	palettelib := palettenom.New()
-	palette, err = palettelib.Load("palettes/monobrew.png")
+	palette, err = palettelib.Load("palettes/" + *palettename + ".png")
 
 	if err != nil {
 		panic(err)
