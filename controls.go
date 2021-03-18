@@ -26,7 +26,7 @@ func CatchControls() {
 		case sdl.SCANCODE_UP:
 			buttons[0] = true
 		case sdl.SCANCODE_DOWN:
-			buttons[1] = false
+			buttons[1] = true
 		case sdl.SCANCODE_LEFT:
 			buttons[2] = true
 		case sdl.SCANCODE_RIGHT:
