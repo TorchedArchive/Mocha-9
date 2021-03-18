@@ -4,17 +4,15 @@ import (
 	"fmt"
 
 	"github.com/yuin/gopher-lua"
-	"github.com/veandco/go-sdl2/sdl"
 )
 
 var l *lua.LState
 var lcart *lua.LState
-var buttons = map[int]bool{
-	0: false}
-
 var started = false
 
 func InitLua() {
+	CatchControls()
+
 	l = lua.NewState()
 	lcart = lua.NewState()
 
@@ -29,13 +27,6 @@ func InitLua() {
 	SetGlobalF("print", l.NewFunction(m9print))
 	SetGlobalF("plot", l.NewFunction(m9plot))
 	SetGlobalF("button", l.NewFunction(m9button))
-
-	interrupts.On("key", func(sc sdl.Scancode) {
-		switch sc {
-		case sdl.SCANCODE_UP:
-			buttons[0] = true
-		}
-	})
 
 	if err := l.DoFile("mocha.lua"); err != nil {
 		panic(err)
